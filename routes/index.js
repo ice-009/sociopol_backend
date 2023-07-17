@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const authRoutes = require('./auth.routes')
 const adminRoute = require('./admin.routes')
+const dataRoute = require('./data.routes')
 
 const defaultRoutes = [
     {
@@ -10,6 +11,10 @@ const defaultRoutes = [
     {
       path:'/admin',
       route:adminRoute
+    },
+    {
+      path:'/data',
+      route:dataRoute
     }
 
   ];
