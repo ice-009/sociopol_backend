@@ -19,6 +19,14 @@ router.get(
     '/getAllLiterature',
     dataController.getAllLiterature
 )
+router.get(
+    '/upcomingall',
+    dataController.getAllUpcomingEvent
+)
+router.get(
+    '/allbanner',
+    dataController.getAllBanner
+)
 
 
 

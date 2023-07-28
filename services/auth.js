@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs')
 const sendToken = require('../utils/sendtoken')
 
 
-const signup = async (userBody) => {
+const signup = async (userBody,dppath) => {
 
     if (nullChecker(userBody.fullname))
         throw new ApiError(httpStatus.BAD_REQUEST, 'fullname_required');
@@ -29,8 +29,9 @@ const signup = async (userBody) => {
         throw new ApiError(httpStatus.BAD_REQUEST, ' address required')
     if (nullChecker(userBody.referredby))
         throw new ApiError(httpStatus.BAD_REQUEST, 'referredby_required');
-    if (nullChecker(userBody.pic))
-        throw new ApiError(httpStatus.BAD_REQUEST, 'referredby_required');
+    if (nullChecker(dppath))
+        throw new ApiError(httpStatus.BAD_REQUEST, 'dp image required');
+    
 
     const usersBody = await UserModel.User.find().sort({ "userId": -1 }).limit(1);
 
@@ -48,7 +49,7 @@ const signup = async (userBody) => {
         email: userBody.email,
         password: userBody.password,
         phoneno: userBody.phoneno,
-        pic: userBody.pic,
+        pic:dppath,
         referredby: userBody.referredby,
         address: userBody.address,
         city: userBody.city,
@@ -92,6 +93,21 @@ const resetpass = async (userBody,req) => {
     }
 }
 
+const getDpName = async(id)=>{
+    console.log(id)
+    const userLogged = await UserModel.User.findOne({userId:id })
+    const dpname = {
+        "name":userLogged.fullname,
+        "dp":userLogged.pic
+    }
+    return dpname
+    
+}
+
+
+
+
+
 
 
 
@@ -100,5 +116,6 @@ const resetpass = async (userBody,req) => {
 module.exports = {
     signup,
     login,
-    resetpass
+    resetpass,
+    getDpName
 }

@@ -36,36 +36,124 @@ const getAllVlog = catchAsyn(async(req,res)=>{
 })
 
 
-const uploadfile = catchAsyn(async(req,res)=>{
+const uploadfile = async(req)=>{
 
-
-    const { image } = req.files;
+    const { image} = req.files;
 
     // If no image submitted, exit
-    if (!image) return res.sendStatus(400);
+    // if (!image) return res.sendStatus(400);
 
     const ext = path.extname(image.name)
 
     const name = randomByte(10)
 
-    // Move the uploaded image to our upload folder
-    image.mv(__dirname + '../../../upload/' +name +ext);
+    const svname = __dirname + '../../../public/file/' +name +ext
+    const svreturn = '/file/' +name +ext
 
-    res.status(201).json({
-      success:true,
-      url:name+ext
-    });
-})
+    // Move the uploaded image to our upload folder
+    image.mv(svname);
+
+    // res.status(201).json({
+    //   success:true,
+    //   url:name+ext
+    // })
+
+    return svreturn
+
+}
+
+const uploadfilethumb = async(req)=>{
+
+
+  const {thumbnail} = req.files;
+
+  const ext = path.extname(thumbnail.name)
+
+  const name = randomByte(10)
+
+  const svname = __dirname + '../../../public/file/' +name +ext
+  const svreturn = '/file/' +name +ext
+
+  // Move the uploadedthumbnail to our upload folder
+  thumbnail.mv(svname);
+
+  // res.status(201).json({
+  //   success:true,
+  //   url:name+ext
+  // })
+
+  return svreturn
+
+}
+
+const uploadfileBanner = async(req)=>{
+
+
+  const {banner} = req.files;
+
+
+  const ext = path.extname(banner.name)
+
+  const name = randomByte(10)
+
+  const svname = __dirname + '../../../public/file/' +name +ext
+  const svreturn = '/file/' +name +ext
+
+  // Move the uploadedbanner to our upload folder
+  banner.mv(svname);
+
+  return svreturn
+
+}
+
+
+
+const uploadfileBlog = async(req)=>{
+
+
+  const { image} = req.files;
+
+  const list = [];
+
+  for(let i = 0 ; i < image.length; i++){
+
+    const ext = path.extname(image[i].name)
+
+    const name = randomByte(10)
+  
+    const svname = __dirname + '../../../public/file/' +name +ext
+    const svreturn = '/file/' +name +ext
+  
+
+    image[i].mv(svname)
+    list.push(svreturn)
+}
+
+  return list
+
+}
+
+
+
 
 
 const createBlog = catchAsyn(async(req,res)=>{
+  console.log(req.body)
+
   const admin = await AdminModel.Admin.findById(
     req.user.id
   );
   if(admin.userId!=1){
     return ;
   }
-  const blog =await vlogService.createBlog(req.body)
+  const imglist = await uploadfileBlog(req)
+  console.log(imglist)
+  const thumnailpath = await uploadfilethumb(req)
+  console.log(thumnailpath)
+  const bannerpath = await uploadfileBanner(req)
+  console.log(bannerpath)
+
+  const blog =await vlogService.createBlog(req.body,imglist,thumnailpath,bannerpath)
   res.status(201).json(
     blog
   )
@@ -78,11 +166,44 @@ const createliterature = catchAsyn(async(req,res)=>{
   if(admin.userId!=1){
     return ;
   }
-  const literature =await vlogService.createLiterature(req.body)
+
+ const pathname = await uploadfile(req)
+
+
+  const literature =await vlogService.createLiterature(req.body,pathname)
   res.status(201).json(
     literature
   )
 })
+
+const createBanner=catchAsyn(async(req,res)=>{
+  const admin = await AdminModel.Admin.findById(
+    req.user.id
+  );
+  if(admin.userId!=1){
+    return ;
+  }
+
+  const pathname = await uploadfile(req)
+  console.log(pathname)
+  const banner = vlogService.createBanner(req.body,pathname)
+  res.status(201).json(
+    banner
+  )
+})
+
+const getCreateBanner = (async(req,res)=>{
+  const admin = await AdminModel.Admin.findById(
+    req.user.id
+  );
+  if(admin.userId!=1){
+    return ;
+  }
+
+  res.render('banner')
+})
+
+
 
 const getAllBlog = catchAsyn(async(req,res)=>{
 
@@ -96,6 +217,29 @@ const getAllLiterature = catchAsyn(async(req,res)=>{
   res.status(200).json(allliterature)
 })
 
+const getAllBanner = catchAsyn(async(req,res)=>{
+  
+  const allBanner = await vlogService.getAllBanner();
+  res.status(200).json(allBanner)
+})
+
+
+const getCreateVlog = catchAsyn(async(req,res)=>{
+      res.render('createvlog')
+})
+
+const getCreateLiterature = catchAsyn(async(req,res)=>{
+  res.render('crliterature')
+})
+
+const getCreateBlog = catchAsyn(async(req,res)=>{
+  res.render('crblog')
+})
+
+
+const getLogin = catchAsyn(async(req,res)=>{
+  res.render('index')
+})
 
 
 const randomByte = (size)=>{
@@ -112,5 +256,12 @@ module.exports = {
     createBlog,
     createliterature,
     getAllBlog,
-    getAllLiterature
+    getAllLiterature,
+    createBanner,
+    getAllBanner,
+    getCreateVlog,
+    getLogin,
+    getCreateLiterature,
+    getCreateBlog,
+    getCreateBanner
 }

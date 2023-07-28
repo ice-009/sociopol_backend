@@ -2,7 +2,7 @@ const catchAsyn = require('../utils/catch_async')
 const authService = require('../services/auth')
 const sendToken = require('../utils/sendtoken')
 const vlogService = require('../services/vlog')
-
+const chatService = require('../services/chat')
 
 
 const getAllBlog = catchAsyn(async (req, res) => {
@@ -33,6 +33,21 @@ const getAllNewsAndUpdate = catchAsyn(async(req,res)=>{
     res.status(200).json(allnews)
 })
 
+const getAllUpcomingEvent = catchAsyn(async(req,res)=>{
+    const allnews = await vlogService.getAllUpcomingEvent();
+    res.status(200).json(allnews)
+})
+
+const getAllBanner = catchAsyn(async(req,res)=>{
+    const allbanner = await vlogService.getAllBanner();
+    res.status(200).json(allbanner)
+})
+
+// const createChat = catchAsyn(async(req,res)=>{
+//     const chat = await chatService.createChat(req.body)
+// })
+
+
 
 
 
@@ -41,5 +56,8 @@ module.exports = {
     getAllLiterature,
     getAllRecentEvent,
     getAllVlog,
-    getAllNewsAndUpdate
+    getAllNewsAndUpdate,
+    getAllBanner,
+    getAllUpcomingEvent,
+    // createChat
 }

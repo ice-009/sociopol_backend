@@ -4,6 +4,7 @@ const ApiError = require('../../utils/api_error')
 const httpStatus = require('http-status')
 const bcrypt = require('bcryptjs')
 const sendToken = require('../../utils/sendtoken')
+const sendTokenWeb = require('../../utils/stweb')
 
 
 
@@ -22,7 +23,7 @@ const login = async (body,res) => {
         res.status(401).json({ success: false, message: "Invalid email and password" })
     } else {
         const adminLogged = await AdminModel.Admin.findOne({ username:body.username })
-        sendToken(adminLogged, 200, res)
+        sendTokenWeb(adminLogged, 200, res)
     }
 }
 

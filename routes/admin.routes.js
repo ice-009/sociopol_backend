@@ -8,12 +8,17 @@ const {authToken} = require('../middlewares/auth')
 router.post( 
   '/login',
   adminController.login
-);
+)
 
 router.post( 
   '/create/vlog',
   authToken,
   adminController.createVlog
+)
+router.get( 
+  '/create/blog',
+  authToken,
+  adminController.getCreateBlog
 )
 router.post( 
   '/create/blog',
@@ -26,11 +31,42 @@ router.post(
   authToken,
   adminController.createliterature
 )
+router.get(
+  '/create/literature',
+  authToken,
+  adminController.getCreateLiterature
+)
+router.post(
+  '/create/banner',
+  authToken,
+  adminController.createBanner
+)
+router.get(
+  '/create/banner',
+  authToken,
+  adminController.getCreateBanner
+)
+
+router.get(
+  '/create/vlog',
+  authToken,
+  adminController.getCreateVlog
+)
+
+router.get(
+  '/login',
+  adminController.getLogin
+)
 
 router.get( 
   '/vlog/all',
   authToken,
   adminController.getAllVlog
+)
+router.get( 
+  '/banner/all',
+  authToken,
+  adminController.getAllBanner
 )
 router.get( 
   '/blog/all',
@@ -48,6 +84,8 @@ router.post(
   authToken,
   adminController.uploadfile
 )
+
+
 
 
 module.exports = router;

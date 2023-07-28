@@ -1,5 +1,6 @@
 const VlogModel = require('../model/vlog')
 const BlogModel = require('../model/blog')
+const BannerModel= require('../model/banner')
 const LiteratureModel = require('../model/literature')
 const { nullChecker } = require('../helper/null_checker')
 const ApiError = require('../utils/api_error')
@@ -23,12 +24,30 @@ const getAllLiterature = async()=>{
     return await LiteratureModel.Literature.find();
 }
 
+const getAllBanner = async()=>{
+    return await BannerModel.Banner.find();
+}
+
+
+
 const getAllRecentEvent = async()=>{
     const recevent = await BlogModel.Blog.find();
     const arr = [];
     for (let index = 0; index < recevent.length; index++) {
         const element = recevent[index];
         if(element.blogtype=='Recent Event'){
+            arr.push(element)
+        }       
+    }
+    return arr;
+}
+
+const getAllUpcomingEvent  = async()=>{
+    const recevent = await BlogModel.Blog.find();
+    const arr = [];
+    for (let index = 0; index < recevent.length; index++) {
+        const element = recevent[index];
+        if(element.blogtype=='Upcoming Event'){
             arr.push(element)
         }       
     }
@@ -53,5 +72,7 @@ module.exports = {
     getAllBlog,
     getAllLiterature,
     getAllRecentEvent,
-    getAllNewsAndUpdate
+    getAllNewsAndUpdate,
+    getAllBanner,
+    getAllUpcomingEvent
 }

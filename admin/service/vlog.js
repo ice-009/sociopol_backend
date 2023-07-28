@@ -1,5 +1,6 @@
 const VlogModel = require('../../model/vlog')
 const BlogModel = require('../../model/blog')
+const BannerModel = require('../../model/banner')
 const LiteratureModel = require('../../model/literature')
 const { nullChecker } = require('../../helper/null_checker')
 const ApiError = require('../../utils/api_error')
@@ -45,13 +46,13 @@ const getAllBlog = async()=>{
 }
 
 
-const createBlog = async (body) => {
+const createBlog = async (body,imgpath,thumbpath,bannerpath) => {
 
     if (nullChecker(body.title))
         throw new ApiError(httpStatus.BAD_REQUEST, 'title_required');
-    if (nullChecker(body.bannerurl))
+    if (nullChecker(bannerpath))
         throw new ApiError(httpStatus.BAD_REQUEST, 'banner_url_required');
-    if (nullChecker(body.thumbnailurl))
+    if (nullChecker(thumbpath))
         throw new ApiError(httpStatus.BAD_REQUEST, 'thumbnailurl_required');
 
     const blogsBody = await BlogModel.Blog.find().sort({ "blogId": -1 }).limit(1);
@@ -67,9 +68,9 @@ const createBlog = async (body) => {
         blogId: blogId,
         title: body.title,
         description: body.description,
-        bannerurl: body.bannerurl,
-        thumbnailurl: body.thumbnailurl,
-        images: body.images,
+        bannerurl:bannerpath,
+        thumbnailurl:thumbpath,
+        images:imgpath,
         createat: Date.now(),
         date: body.date,
         blogtype: body.blogtype
@@ -78,12 +79,12 @@ const createBlog = async (body) => {
 
 
 
-const createLiterature = async (body) => {
+const createLiterature = async (body,path) => {
     console.log(body)
     if (nullChecker(body.title))
         throw new ApiError(httpStatus.BAD_REQUEST, 'title_required');
-    if (nullChecker(body.fileurl))
-        throw new ApiError(httpStatus.BAD_REQUEST, 'file_url_required');
+    // if (nullChecker(body.fileurl))
+    //     throw new ApiError(httpStatus.BAD_REQUEST, 'file_url_required');
 
     const literatureBody = await LiteratureModel.Literature.find().sort({ "literatureId": -1 }).limit(1);
 
@@ -97,7 +98,7 @@ const createLiterature = async (body) => {
     return await LiteratureModel.Literature.create({
         literatureId:literatureId,
         title:body.title,
-        fileurl:body.fileurl,
+        fileurl:path,
         createat:Date.now()
     })
 
@@ -107,6 +108,25 @@ const createLiterature = async (body) => {
 const getAllLiterature = async()=>{
     return await LiteratureModel.Literature.find();
 }
+const getAllBanner = async()=>{
+    return await BannerModel.Banner.find();
+}
+
+const createBanner = async(body,pathname)=>{
+    const bannerBody = await BannerModel.Banner.find().sort({ "bannerId": -1 }).limit(1);
+
+    var bannerId;
+    if (bannerBody.length == 0) {
+        bannerId = 1;
+    } else {
+        bannerId = bannerBody[0].bannerId + 1;
+    }
+
+    return await BannerModel.Banner.create({
+        bannerId:bannerId,
+        url:pathname,
+    })
+}
 
 
 module.exports = {
@@ -115,5 +135,7 @@ module.exports = {
     createBlog,
     createLiterature,
     getAllBlog,
-    getAllLiterature
+    getAllLiterature,
+    createBanner,
+    getAllBanner
 }
