@@ -6,7 +6,8 @@ const crypto = require('crypto')
 
 const signup = catchAsyn(async(req,res)=>{
      try {
-
+       
+       
 
        const dppath = await uploadfile(req)
 

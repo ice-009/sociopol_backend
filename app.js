@@ -22,7 +22,7 @@ app.use(fileUpload())
 
 
 // const templatePath = path.join(__dirname,"../templates")
-// const partialPath = path.join(__dirname,"./partials")
+const partialPath = path.join(__dirname,"./partials")
 
 
 
@@ -33,7 +33,7 @@ app.set('view engine', 'hbs');
 //partial path
 
 
-// hbs.registerPartials(partialPath)
+hbs.registerPartials(partialPath)
 
 app.use(express.json())
 app.set('trust proxy', true)

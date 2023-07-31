@@ -78,6 +78,32 @@ router.get(
   authToken,
   adminController.getAllLiterature
 )
+router.get(
+  '/banner/delete/:id',
+  authToken,
+  adminController.deleteBanner
+)
+router.get(
+  '/literature/delete/:id',
+  authToken,
+  adminController.deleteLiterature
+)
+router.get(
+  '/vlog/delete/:id',
+  authToken,
+  adminController.deleteVlog
+)
+router.get(
+  '/blog/delete/:id',
+  authToken,
+  adminController.deleteBlog
+)
+router.get(
+  '/blog/view/:id',
+  authToken,
+  adminController.getBlogById
+)
+
 
 router.post(
   '/upload',

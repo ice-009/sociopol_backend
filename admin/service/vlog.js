@@ -77,6 +77,11 @@ const createBlog = async (body,imgpath,thumbpath,bannerpath) => {
     })
 }
 
+const getBlogById = async(id)=>{
+     const blog =await BlogModel.Blog.findOne({"blogId":id})
+     return blog
+}
+
 
 
 const createLiterature = async (body,path) => {
@@ -105,6 +110,7 @@ const createLiterature = async (body,path) => {
 }
 
 
+
 const getAllLiterature = async()=>{
     return await LiteratureModel.Literature.find();
 }
@@ -125,9 +131,28 @@ const createBanner = async(body,pathname)=>{
     return await BannerModel.Banner.create({
         bannerId:bannerId,
         url:pathname,
+        name:body.name
     })
 }
 
+const deleteBanner = async(id)=>{
+     await BannerModel.Banner.findOneAndDelete({"bannerId":id})
+     return 1;
+}
+
+const deleteLiterature = async(id)=>{
+     await LiteratureModel.Literature.findOneAndDelete({"literatureId":id})
+     return 1;
+}
+
+const deleteVlog = async(id)=>{
+    await VlogModel.Vlog.findOneAndDelete({"vlogId":id})
+    return 1;
+}
+const deleteBlog = async(id)=>{
+    await BlogModel.Blog.findOneAndDelete({"blogId":id})
+    return 1;
+}
 
 module.exports = {
     createVlog,
@@ -137,5 +162,10 @@ module.exports = {
     getAllBlog,
     getAllLiterature,
     createBanner,
-    getAllBanner
+    getAllBanner,
+    deleteBanner,
+    deleteLiterature,
+    deleteVlog,
+    deleteBlog,
+    getBlogById
 }

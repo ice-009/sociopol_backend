@@ -25,14 +25,16 @@ const createVlog = catchAsyn(async (req,res)=>{
 
     const vlog = await vlogService.createVlog(req.body)
 
-    res.status(201).json(
-      vlog
-    )
+    // res.status(201).json(           ___________________________DONOT REMOVE USE FOR API___
+    //   vlog
+    // )
+    res.redirect('/api/v1/admin/vlog/all')
 })
 
 const getAllVlog = catchAsyn(async(req,res)=>{
     const allvlog = await vlogService.getAllVlog();
-    res.status(200).json(allvlog)
+    // res.status(200).json(allvlog)              ___________________________DONOT REMOVE USE FOR API___
+    res.render('new/listvlog',{"vlog":allvlog})
 })
 
 
@@ -187,9 +189,10 @@ const createBanner=catchAsyn(async(req,res)=>{
   const pathname = await uploadfile(req)
   console.log(pathname)
   const banner = vlogService.createBanner(req.body,pathname)
-  res.status(201).json(
-    banner
-  )
+  // res.status(201).json(                    __________________________________API
+  //   banner
+  // )
+  res.redirect('/api/v1/admin/banner/all')
 })
 
 const getCreateBanner = (async(req,res)=>{
@@ -200,7 +203,9 @@ const getCreateBanner = (async(req,res)=>{
     return ;
   }
 
-  res.render('banner')
+  const allBanner = await vlogService.getAllBanner();
+
+  res.render('new/crbanner')
 })
 
 
@@ -208,37 +213,68 @@ const getCreateBanner = (async(req,res)=>{
 const getAllBlog = catchAsyn(async(req,res)=>{
 
   const allblog = await vlogService.getAllBlog();
-  res.status(200).json(allblog)
+  // res.status(200).json(allblog)     ___________________________DONOT REMOVE USE FOR API___
+  res.render('new/listblog',{"blog":allblog})
 })
+
+const deleteBanner = catchAsyn(async(req,res)=>{
+   await vlogService.deleteBanner(req.params.id)
+   res.redirect('/api/v1/admin/banner/all')
+})
+
+const deleteVlog = catchAsyn(async(req,res)=>{
+  await vlogService.deleteVlog(req.params.id)
+  res.redirect('/api/v1/admin/vlog/all')
+})
+const deleteBlog = catchAsyn(async(req,res)=>{
+  await vlogService.deleteBlog(req.params.id)
+  res.redirect('/api/v1/admin/blog/all')
+})
+
+
 
 const getAllLiterature = catchAsyn(async(req,res)=>{
   
   const allliterature = await vlogService.getAllLiterature();
-  res.status(200).json(allliterature)
+  // res.status(200).json(allliterature)     ___________________________DONOT REMOVE USE FOR API___
+  res.render('new/listliterature',{"literature":allliterature})
 })
+
+
+const deleteLiterature = catchAsyn(async(req,res)=>{
+  await vlogService.deleteLiterature(req.params.id)
+  res.redirect('/api/v1/admin/literature/all')
+})
+
 
 const getAllBanner = catchAsyn(async(req,res)=>{
   
   const allBanner = await vlogService.getAllBanner();
-  res.status(200).json(allBanner)
+  // res.status(200).json(allBanner)         ___________________________DONOT REMOVE USE FOR API___
+  res.render('new/listbanner',{"banner":allBanner})
 })
 
 
 const getCreateVlog = catchAsyn(async(req,res)=>{
-      res.render('createvlog')
+      res.render('new/crvlog')
 })
 
 const getCreateLiterature = catchAsyn(async(req,res)=>{
-  res.render('crliterature')
+  res.render('new/crliterature')
 })
 
 const getCreateBlog = catchAsyn(async(req,res)=>{
-  res.render('crblog')
+  res.render('new/home')
+})
+
+const getBlogById = catchAsyn(async(req,res)=>{
+    const blog = await vlogService.getBlogById(req.params.id)
+    res.render('new/blogid',{"blog":blog})
 })
 
 
 const getLogin = catchAsyn(async(req,res)=>{
-  res.render('index')
+  res.render('new/login')
 })
 
 
@@ -263,5 +299,10 @@ module.exports = {
     getLogin,
     getCreateLiterature,
     getCreateBlog,
-    getCreateBanner
-}
+    getCreateBanner,
+    deleteBanner,
+    deleteLiterature,
+    deleteVlog,
+    deleteBlog,
+    getBlogById
+} 

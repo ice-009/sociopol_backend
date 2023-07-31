@@ -14,7 +14,7 @@ const sendTokenWeb = (user,statusCode,res)=>{
     };
 
     res.status(statusCode).cookie("token",token,options).redirect(
-        "/api/v1/admin/home/"
+        "/api/v1/admin/create/blog"
     )
 
 };

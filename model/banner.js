@@ -12,6 +12,10 @@ const bannerSchema = mongoose.Schema({
     type:String,
     trim:true
   },
+  name:{
+    type:String,
+    trim:true
+  },
 
 }); 
 

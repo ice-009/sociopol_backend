@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs')
 const sendToken = require('../utils/sendtoken')
 
 
-const signup = async (userBody,dppath) => {
+const signup = async (userBody, dppath) => {
 
     if (nullChecker(userBody.fullname))
         throw new ApiError(httpStatus.BAD_REQUEST, 'fullname_required');
@@ -31,7 +31,11 @@ const signup = async (userBody,dppath) => {
         throw new ApiError(httpStatus.BAD_REQUEST, 'referredby_required');
     if (nullChecker(dppath))
         throw new ApiError(httpStatus.BAD_REQUEST, 'dp image required');
-    
+    if (nullChecker(userBody.district))
+        throw new ApiError(httpStatus.BAD_REQUEST, 'dp image required');
+    if (nullChecker(userBody.vidhan))
+        throw new ApiError(httpStatus.BAD_REQUEST, 'dp image required');
+
 
     const usersBody = await UserModel.User.find().sort({ "userId": -1 }).limit(1);
 
@@ -45,11 +49,13 @@ const signup = async (userBody,dppath) => {
 
     return await UserModel.User.create({
         userId: userId,
+        district:userBody.district,
+        vidhan:userBody.vidhan,
         fullname: userBody.fullname,
         email: userBody.email,
         password: userBody.password,
         phoneno: userBody.phoneno,
-        pic:dppath,
+        pic: dppath,
         referredby: userBody.referredby,
         address: userBody.address,
         city: userBody.city,
@@ -78,7 +84,7 @@ const login = async (userBody, res) => {
     }
 }
 
-const resetpass = async (userBody,req) => {
+const resetpass = async (userBody, req) => {
     if (nullChecker(userBody.password))
         throw new ApiError(httpStatus.BAD_REQUEST, ' password_required');
     // const user = await UserModel.User.findOne({ email: userBody.email }).select("+password");
@@ -93,15 +99,15 @@ const resetpass = async (userBody,req) => {
     }
 }
 
-const getDpName = async(id)=>{
+const getDpName = async (id) => {
     console.log(id)
-    const userLogged = await UserModel.User.findOne({userId:id })
+    const userLogged = await UserModel.User.findOne({ userId: id })
     const dpname = {
-        "name":userLogged.fullname,
-        "dp":userLogged.pic
+        "name": userLogged.fullname,
+        "dp": userLogged.pic
     }
     return dpname
-    
+
 }
 
 

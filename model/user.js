@@ -45,6 +45,12 @@ const userSchema = mongoose.Schema({
     type:String,
     trim:true
   },
+  district:{
+    type:String
+  },
+  vidhan:{
+    type:String
+  },
   address:{
     type:String,
     trim:true
