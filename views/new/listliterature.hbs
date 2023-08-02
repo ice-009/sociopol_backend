@@ -27,41 +27,50 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">ABKM<sup>2</sup></div>
             </a>
 
-            <hr class="sidebar-divider my-0">
+            
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/user/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List User</span>
+                </a>
+
             </li>
 
-            <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/api/v1/admin/create/banner" data-toggle="collapse"
                     data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Banner</span>
                 </a>
+                
             </li>
-            <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link collapsed" href="/api/v1/admin/banner/all" data-toggle="collapse"
                     data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>list Banner</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/blog" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>blog</span>
+                </a>
+                
+            </li>
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/api/v1/admin/blog/all" data-toggle="collapse"
                     data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -70,6 +79,66 @@
                 </a>
 
             </li>
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/literature" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>literature</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/literature/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List literature</span>
+                </a>
+
+            </li>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/vlog" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Vlog</span>
+                </a>
+
+            </li>
+              <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/vlog/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List Vlog</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/team" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Team</span>
+                </a>
+
+            </li>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/team/state/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List State Team</span>
+                </a>
+
+            </li>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/team/district/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List District Team</span>
+                </a>
+
+            </li>
+            
 
 
             <div class="text-center d-none d-md-inline">
@@ -78,6 +147,7 @@
 
 
         </ul>
+
 
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -180,22 +250,7 @@
 
     
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="/vendor/jquery/jquery.min.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="/js/sb-admin-2.min.js"></script>
-
-        <!-- Page level plugins -->
-        <script src="/vendor/chart.js/Chart.min.js"></script>
-
-        <!-- Page level custom scripts -->
-        <script src="/js/demo/chart-area-demo.js"></script>
-        <script src="/js/demo/chart-pie-demo.js"></script>
+    
 
 </body>
 

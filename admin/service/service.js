@@ -28,6 +28,8 @@ const login = async (body,res) => {
 }
 
 
+
+
 const createAdmin = async () => {
     await AdminModel.Admin.create({
         userId: 1,

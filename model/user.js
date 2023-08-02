@@ -68,6 +68,10 @@ const userSchema = mongoose.Schema({
   },
   createdBy:{
     type:Date
+  },
+  active:{
+    type:Boolean,
+    default:false
   }
 
 }); 

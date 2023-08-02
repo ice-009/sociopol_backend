@@ -46,6 +46,21 @@ router.get(
   authToken,
   adminController.getCreateBanner
 )
+router.get(
+  '/create/team',
+  authToken,
+  adminController.getTeam
+)
+router.post(
+  '/create/team/state',
+  authToken,
+  adminController.createTeamState
+)
+router.post(
+  '/create/team/district',
+  authToken,
+  adminController.createTeamDistrict
+)
 
 router.get(
   '/create/vlog',
@@ -78,6 +93,11 @@ router.get(
   authToken,
   adminController.getAllLiterature
 )
+router.get( 
+  '/user/all',
+  authToken,
+  adminController.getAllUser
+)
 router.get(
   '/banner/delete/:id',
   authToken,
@@ -103,6 +123,39 @@ router.get(
   authToken,
   adminController.getBlogById
 )
+
+router.get(
+  '/team/delete/:id',
+  authToken,
+  adminController.deleteTeam
+)
+// router.get(
+//   '/user/delete/:id',
+//   authToken,
+//   adminController.deleteBlog
+// )
+router.get(
+  '/user/delete/:id',
+  authToken,
+  adminController.deleteUser
+)
+router.get(
+  '/user/approve/:id',
+  authToken,
+  adminController.toggleApprove
+)
+
+router.get( 
+  '/team/state/all',
+  authToken,
+  adminController.getTeamStateList
+)
+router.get( 
+  '/team/district/all',
+  authToken,
+  adminController.getTeamdistrictList
+)
+
 
 
 router.post(

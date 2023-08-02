@@ -1,10 +1,13 @@
 
 const catchAsyn = require('../../utils/catch_async')
-const adminService = require('../service/service')
+const adminService = require('../service/service') 
 const vlogService = require('../service/vlog')
 const AdminModel = require('../../model/admin')
 const crypto = require('crypto')
 const path = require('path')
+const listconst = require('../data/district')
+const teamService = require('../service/team')
+
 
 const login = catchAsyn(async(req,res)=>{
      try {
@@ -277,6 +280,54 @@ const getLogin = catchAsyn(async(req,res)=>{
   res.render('new/login')
 })
 
+const getAllUser = catchAsyn(async(req,res)=>{
+   const user = await vlogService.getAllUser()
+   res.render('new/listuser',{"user":user})
+})
+
+const toggleApprove = catchAsyn(async(req,res)=>{
+   await vlogService.userApprovalToggle(req.params.id)
+   res.redirect('/api/v1/admin/user/all')
+})
+
+
+const deleteUser = catchAsyn(async(req,res)=>{
+  await vlogService.deleteUser(req.params.id)
+  res.redirect('/api/v1/admin/user/all')
+})
+
+const getTeam = catchAsyn(async(req,res)=>{
+   res.render('new/team',{"district":listconst.districtList,"state":listconst.stateList})
+})
+
+const createTeamState =catchAsyn(async(req,res)=>{
+    const path = await uploadfile(req)
+    const team =await teamService.createTeam(req.body,path,"state")
+    res.redirect('/api/v1/admin/team/state/all')
+
+})
+const createTeamDistrict =catchAsyn(async(req,res)=>{
+  const path = await uploadfile(req)
+  const team =await teamService.createTeam(req.body,path,"district")
+  res.redirect('/api/v1/admin/team/district/all')
+
+})
+
+const getTeamStateList = catchAsyn(async(req,res)=>{
+     const team = await teamService.getStateAllTeam()
+     res.render('new/listteamstate',{"team":team})
+})
+
+const deleteTeam = catchAsyn(async(req,res)=>{
+     const type =await teamService.deleteTeamById(req.params.id)
+     res.redirect('/api/v1/admin/team/'+type+'/all')
+})
+
+const getTeamdistrictList = catchAsyn(async(req,res)=>{
+  const team = await teamService.getDistrictAllTeam()
+  res.render('new/listteamdistrict',{"team":team})
+})
+
 
 const randomByte = (size)=>{
   return crypto.randomBytes(size).toString('hex');
@@ -304,5 +355,14 @@ module.exports = {
     deleteLiterature,
     deleteVlog,
     deleteBlog,
-    getBlogById
+    getBlogById,
+    getAllUser,
+    toggleApprove,
+    deleteUser,
+    getTeam,
+    createTeamState,
+    getTeamStateList,
+    getTeamdistrictList,
+    createTeamDistrict,
+    deleteTeam
 } 

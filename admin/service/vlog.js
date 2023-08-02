@@ -1,6 +1,7 @@
 const VlogModel = require('../../model/vlog')
 const BlogModel = require('../../model/blog')
 const BannerModel = require('../../model/banner')
+const UserModel = require('../../model/user')
 const LiteratureModel = require('../../model/literature')
 const { nullChecker } = require('../../helper/null_checker')
 const ApiError = require('../../utils/api_error')
@@ -154,6 +155,23 @@ const deleteBlog = async(id)=>{
     return 1;
 }
 
+const getAllUser = async ()=>{
+     const user = await UserModel.User.find()
+     return user
+}
+
+const userApprovalToggle = async(id)=>{
+    const user = await UserModel.User.findOne({"userId":id})
+    const active = user.active;
+    await UserModel.User.findOneAndUpdate({"userId":id},{"active":!active})
+    return true
+}
+
+const deleteUser = async(id)=>{
+   await UserModel.User.findOneAndDelete({"userId":id})
+   return true
+}
+
 module.exports = {
     createVlog,
     getAllVlog,
@@ -167,5 +185,8 @@ module.exports = {
     deleteLiterature,
     deleteVlog,
     deleteBlog,
-    getBlogById
+    getBlogById,
+    getAllUser,
+    userApprovalToggle,
+    deleteUser
 }
