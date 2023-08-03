@@ -275,6 +275,12 @@ const getBlogById = catchAsyn(async(req,res)=>{
     res.render('new/blogid',{"blog":blog})
 })
 
+const getEditBlogById = catchAsyn(async(req,res)=>{
+  const blog = await vlogService.getBlogById(req.params.id)
+  res.render('new/blogidedit',{"blog":blog})
+})
+
+
 
 const getLogin = catchAsyn(async(req,res)=>{
   res.render('new/login')
@@ -324,8 +330,9 @@ const deleteTeam = catchAsyn(async(req,res)=>{
 })
 
 const getTeamdistrictList = catchAsyn(async(req,res)=>{
-  const team = await teamService.getDistrictAllTeam()
-  res.render('new/listteamdistrict',{"team":team})
+
+  const team = await teamService.getDistrictAllTeam(req)
+  res.render('new/listteamdistrict',{"team":team,"district":listconst.districtList})
 })
 
 
@@ -364,5 +371,6 @@ module.exports = {
     getTeamStateList,
     getTeamdistrictList,
     createTeamDistrict,
-    deleteTeam
-} 
+    deleteTeam,
+    getEditBlogById
+}

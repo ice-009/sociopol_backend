@@ -123,6 +123,11 @@ router.get(
   authToken,
   adminController.getBlogById
 )
+router.get(
+  '/blog/edit/:id',
+  authToken,
+  adminController.getEditBlogById
+)
 
 router.get(
   '/team/delete/:id',

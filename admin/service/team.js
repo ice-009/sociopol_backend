@@ -51,6 +51,7 @@ const createTeam = async (body, path, type) => {
         name: body.name,
         type: type,
         image: path,
+        district:body.district,
         // userId:body.userId,
         postname: body.postname,
         sequenceno: body.sequenceno,
@@ -82,7 +83,7 @@ const getStateAllTeam = async () => {
     }
     return stateTeam;
 }
-const getDistrictAllTeam = async()=>{
+const getDistrictAllTeam = async(req)=>{
     const teams = await TeamModel.Team.find()
     //  console.log(teams[1].type)
     var districtTeam = [];
@@ -90,7 +91,15 @@ const getDistrictAllTeam = async()=>{
         const element = teams[index];
         // console.log(element)
         if (element.type != 'state') {
-            districtTeam.push(element)
+            
+
+            if(!nullChecker(req.query.district)){
+                if(element.district==req.query.district){
+                    districtTeam.push(element)
+                }
+            }else{
+                districtTeam.push(element)
+            }
         }
 
     }

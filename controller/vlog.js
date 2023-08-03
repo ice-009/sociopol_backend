@@ -3,7 +3,7 @@ const authService = require('../services/auth')
 const sendToken = require('../utils/sendtoken')
 const vlogService = require('../services/vlog')
 const chatService = require('../services/chat')
-
+const teamService = require('../admin/service/team')
 
 const getAllBlog = catchAsyn(async (req, res) => {
 
@@ -47,6 +47,16 @@ const getAllBanner = catchAsyn(async(req,res)=>{
 //     const chat = await chatService.createChat(req.body)
 // })
 
+const getAllStateTeam = catchAsyn(async(req,res)=>{
+    const team = await teamService.getStateAllTeam()
+    res.json(team)
+})
+
+const getAllDistrictTeam = catchAsyn(async(req,res)=>{
+    const team = await teamService.getDistrictAllTeam(req)
+    res.json(team)
+})
+
 
 
 
@@ -59,5 +69,7 @@ module.exports = {
     getAllNewsAndUpdate,
     getAllBanner,
     getAllUpcomingEvent,
+    getAllStateTeam,
+    getAllDistrictTeam
     // createChat
 }

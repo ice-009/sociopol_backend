@@ -19,6 +19,9 @@ const teamSchema = mongoose.Schema({
     trim: true,
     enum: ['state', 'district']
   },
+  district:{
+    type:String
+  },
   postname:{
     type:String
   },

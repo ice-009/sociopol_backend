@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Edit Blog</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -148,81 +148,86 @@
 
         </ul>
 
-         
-    
-
 
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content mx-5 my-3">
+            <div id="content">
 
-                <form method="get">
-                    <div class="my-3 mx-3">
-                                <label class="my-2" for="lang">Select District</label>
-                    <select name="district" id="lang">
-                        {{#each district}}
-                        <option value="{{this}}" selected="selected">{{this}}</option>
-                        {{/each}}
-                            </div>
-                    </select>
-                    <button type="submit">Search</button>
-                </form>
-                
+
 
                 <div class="row justify-content-center">
 
-                    
-                    
+                    <div class="col-xl-8 col-lg-6 col-md-6">
 
 
-                        <div class="card-body">
-                            <h1>District Team list</h1>
-
-                            
-                    
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Index</th>
-                                            <th>Name</th>
-                                            <th>Postname</th>
-                                            <th>Image</th>
-                                            <th>Delete</th>
-                                            {{!-- <th>Start date</th>
-                                            <th>Salary</th> --}}
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Index</th>
-                                            <th>Name</th>
-                                            <th>Postname</th>
-                                            <th>Image</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        {{#each team}}
-                                        <tr>
-                                            <td>{{@index}}</td>
-                                            {{!-- <td>{{this.teamId}}</td> --}}
-                                            <td>{{this.name}}</td>
-                                            <td>{{this.postname}}</td>
-                                            <th><img src="{{this.image}}" style="height:100px;"></th>
-                                            <td><a href="/api/v1/admin/team/delete/{{this.teamId}}">Delete</a></td>
-                                        </tr>
-                                        {{/each}}
-                                    </tbody>
-
-
-
-                                </table>
+                        <form class="user" action="/api/v1/admin/create/blog" method="post"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="exampleInputEmail" class="form-label px-2">Title</label>
+                                <input type="text" class="form-control form-control-user" name="title"
+                                    value="{{blog.title}}" id="exampleInputEmail" aria-describedby="emailHelp"
+                                    placeholder="Enter title">
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Banner</label>
+                                <input type="file" name="banner" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                            <img style="height: 100px;" src="{{blog.bannerurl}}"></img>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile2">Thumbnail</label>
+                                <input type="file" name="thumbnail" class="form-control-file"
+                                    id="exampleFormControlFile1">
+                            </div>
+                            <img style="height: 100px;" src="{{blog.thumbnailurl}}"></img>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputdate" class="form-label px-2">Date {{blog.createat}}</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputdate" class="form-label px-2">Date</label>
+                                <input type="date" class="form-control form-control-user" type="date"
+                                    value="{{blog.createat}}" id="exampleInputdate" aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile3">Images</label>
+                                <input type="file" name="image" multiple class="form-control-file"
+                                    id="exampleFormControlFile3">
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            {{#each blog.images}}
+                            <img src={{this}} alt="Italian Trulli" style="height:100px;">
+                            <hr>
+                            {{/each}}
 
 
+                            <div class="mb-3">
+                                <label for="exampleInputDate" class="form-label">Description</label>
+                                <div class="noclass">
+                                    <textarea id="w3review" name="description" value="{{blog.description}}" rows="4" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <label class="my-5" for="lang">Blog Type</label>
+                            <select value="{{blog.blogtype}}" name="blogtype" id="lang">
+                                <option value="Upcoming Event">Upcoming Event</option>
+                                <option value="News and Update">News and Update</option>
+                                <option value="Recent Event">Recent Event</option>
+                                <option value="Blog">Blog</option>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                Update Blog
+                            </button>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
@@ -232,8 +237,9 @@
         </div>
 
 
-
-
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
 

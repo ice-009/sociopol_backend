@@ -27,6 +27,14 @@ router.get(
     '/allbanner',
     dataController.getAllBanner
 )
+router.get(
+    '/team/state',
+    dataController.getAllStateTeam
+)
+router.get(
+    '/team/district',
+    dataController.getAllDistrictTeam
+)
 
 
 
