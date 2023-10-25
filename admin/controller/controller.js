@@ -306,6 +306,12 @@ const getTeam = catchAsyn(async(req,res)=>{
    res.render('new/team',{"district":listconst.districtList,"state":listconst.stateList})
 })
 
+const createTeamNational = catchAsyn(async (req, res) => {
+  const path = await uploadfile(req);
+  const team = await teamService.createTeam(req.body, path, 'national');
+  res.redirect('/api/v1/admin/team/national/all');
+});
+
 const createTeamState =catchAsyn(async(req,res)=>{
     const path = await uploadfile(req)
     const team =await teamService.createTeam(req.body,path,"state")
@@ -372,5 +378,6 @@ module.exports = {
     getTeamdistrictList,
     createTeamDistrict,
     deleteTeam,
-    getEditBlogById
+    getEditBlogById,
+    createTeamNational
 }

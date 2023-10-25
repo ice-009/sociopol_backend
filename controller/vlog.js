@@ -46,6 +46,15 @@ const getAllBanner = catchAsyn(async(req,res)=>{
 // const createChat = catchAsyn(async(req,res)=>{
 //     const chat = await chatService.createChat(req.body)
 // })
+const getAllNationalTeam = async (req, res) => {
+    try {
+      const nationalTeams = await teamService.getNationalAllTeam();
+      res.json(nationalTeams);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
 
 const getAllStateTeam = catchAsyn(async(req,res)=>{
     const team = await teamService.getStateAllTeam()
@@ -70,6 +79,7 @@ module.exports = {
     getAllBanner,
     getAllUpcomingEvent,
     getAllStateTeam,
-    getAllDistrictTeam
+    getAllDistrictTeam,
+    getAllNationalTeam
     // createChat
 }

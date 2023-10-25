@@ -8,7 +8,7 @@ const TeamModel = require('../../model/team')
 const listconst = require('../data/district')
 
 const createTeam = async (body, path, type) => {
-    console.log(body)
+    console.log(body);
     if (nullChecker(body.name))
         throw new ApiError(httpStatus.BAD_REQUEST, 'teamname_required');
 
@@ -19,28 +19,27 @@ const createTeam = async (body, path, type) => {
     if (nullChecker(body.sequenceno))
         throw new ApiError(httpStatus.BAD_REQUEST, 'sequenceno_required');
     
-    if (type == 'state') {
+    if (type === 'state') {
         if (nullChecker(body.state))
             throw new ApiError(httpStatus.BAD_REQUEST, 'state_required');
-    } else {
+    } else if (type === 'district') {
         if (nullChecker(body.district))
             throw new ApiError(httpStatus.BAD_REQUEST, 'district_required');
     }
 
-
-
     var locationId;
-    if (type == 'state') {
-        locationId = listconst.stateList.indexOf(body.state)+1
+    if (type === 'state') {
+        locationId = listconst.stateList.indexOf(body.state) + 1;
+    } else if (type === 'district') {
+        locationId = listconst.stateList.length + listconst.districtList.indexOf(body.district) + 1;
     } else {
-        locationId = listconst.stateList.length + listconst.districtList.indexOf(body.district) +1
+        locationId = listconst.stateList.length + listconst.districtList.length + 1;
     }
-
 
     const teambody = await TeamModel.Team.find().sort({ "teamId": -1 }).limit(1);
 
     var teamId;
-    if (teambody.length == 0) {
+    if (teambody.length === 0) {
         teamId = 1;
     } else {
         teamId = teambody[0].teamId + 1;
@@ -51,15 +50,13 @@ const createTeam = async (body, path, type) => {
         name: body.name,
         type: type,
         image: path,
-        district:body.district,
-        // userId:body.userId,
+        district: body.district,
         postname: body.postname,
         sequenceno: body.sequenceno,
-        locationId: locationId
-        // state:body.state
-    })
-
+        locationId: locationId,
+    });
 }
+
 
 
 const deleteTeamById = async (id) => {
@@ -105,11 +102,18 @@ const getDistrictAllTeam = async(req)=>{
     }
     return districtTeam;
 }
+const getNationalAllTeam = async () => {
+    const teams = await TeamModel.Team.find({ type: 'national' });
+    return teams;
+}
+
+
 
 
 module.exports = {
     createTeam,
     getStateAllTeam,
     deleteTeamById,
-    getDistrictAllTeam
+    getDistrictAllTeam,
+    getNationalAllTeam
 }

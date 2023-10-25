@@ -52,6 +52,11 @@ router.get(
   adminController.getTeam
 )
 router.post(
+  '/create/team/national',
+  authToken,
+  adminController.createTeamNational
+)
+router.post(
   '/create/team/state',
   authToken,
   adminController.createTeamState
