@@ -6,6 +6,7 @@ const sendToken = require('../../utils/sendtoken')
 const sendTokenWeb = require('../../utils/stweb')
 const TeamModel = require('../../model/team')
 const listconst = require('../data/district')
+const NationalTeam = require('../../model/nationalteam')
 
 const createTeam = async (body, path, type) => {
     console.log(body);
@@ -103,7 +104,7 @@ const getDistrictAllTeam = async(req)=>{
     return districtTeam;
 }
 const getNationalAllTeam = async () => {
-    const teams = await TeamModel.Team.find({ type: 'national' });
+    const teams = await NationalTeam.find();
     return teams;
 }
 

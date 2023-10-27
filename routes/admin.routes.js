@@ -3,7 +3,7 @@ const router = express.Router();
 const authController = require('../controller/auth')
 const adminController = require('../admin/controller/controller')
 const {authToken} = require('../middlewares/auth')
-
+const NationalTeam = require('../model/nationalteam')
 
 router.post( 
   '/login',
@@ -51,11 +51,27 @@ router.get(
   authToken,
   adminController.getTeam
 )
-router.post(
-  '/create/team/national',
-  authToken,
-  adminController.createTeamNational
-)
+router.post('/create/team/national', async (req, res) => {
+  try {
+    // Create a new national team using the request data
+    const nationalTeam = new NationalTeam({
+      name: req.body.name,
+      sequenceno: req.body.sequenceno,
+      country: req.body.country,
+      image: req.body.image, // You may need to handle file uploads here
+    });
+
+    // Save the national team to the database
+    await nationalTeam.save();
+
+    // Send a success response
+    res.status(201).json({ message: 'National team created successfully' });
+  } catch (error) {
+    // Handle any errors and send an error response
+    console.error(error);
+    res.status(500).json({ message: 'Error creating national team' });
+  }
+});
 router.post(
   '/create/team/state',
   authToken,
@@ -165,6 +181,18 @@ router.get(
   authToken,
   adminController.getTeamdistrictList
 )
+router.get('/team/national/all', authToken, async (req, res) => {
+  try {
+    // Fetch all national teams from your data source (e.g., database)
+    const nationalTeams = await NationalTeam.find();
+
+    // Render a view template with the national teams and any other data
+    res.render('new/listnationalteam', { nationalTeams, user: req.user, pageTitle: 'National Teams' });
+  } catch (error) {
+    // Handle any errors or validation issues
+    res.status(500).json({ error: 'An error occurred while fetching and rendering national teams.' });
+  }
+});
 
 
 

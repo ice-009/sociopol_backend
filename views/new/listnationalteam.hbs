@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - National Team List</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">ABKM<sup>2</sup></div>
+            </a>
+
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/user/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List User</span>
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/banner" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Banner</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/banner/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>list Banner</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/blog" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>blog</span>
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/blog/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>list blog</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/literature" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>literature</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/literature/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List literature</span>
+                </a>
+
+            </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/vlog" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Vlog</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/vlog/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List Vlog</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/create/team" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Team</span>
+                </a>
+
+            </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/team/state/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List State Team</span>
+                </a>
+
+            </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/team/district/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List District Team</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+    <a class="nav-link collapsed" href="/api/v1/admin/team/national/all" data-toggle="collapse"
+        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>List National Team</span>
+    </a>
+</li>
+
+
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+
+        </ul>
+            
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content mx-5 my-3">
+                <h1>National Team List</h1>
+
+                <!-- Add a form for filtering/searching national teams if needed -->
+                {{!-- <form method="get">
+                    <div class="my-3 mx-3">
+                        <label class="my-2" for="lang">Select Country</label>
+                        <select name="country" id="lang">
+                            {{#each countries}}
+                            <option value="{{this}}" selected="selected">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button type="submit">Search</button>
+                </form> --}}
+
+                <div class="row justify-content-center">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Index</th>
+                                        <th>Name</th>
+                                        <th>Sequenceno</th>
+                                        <th>Country</th>
+                                        <th>Image</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Index</th>
+                                        <th>Name</th>
+                                        <th>Sequenceno</th>
+                                        <th>Country</th>
+                                        <th>Image</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {{#each nationalTeams}}
+                                    <tr>
+                                        <td>{{@index}}</td>
+                                        <td>{{this.name}}</td>
+                                        <td>{{this.sequenceno}}</td>
+                                        <td>{{this.country}}</td>
+                                        <th><img src="{{this.image}}" style="height:100px;"></th>
+                                        <td><a href="/api/v1/admin/team/delete/{{this.teamId}}">Delete</a></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
