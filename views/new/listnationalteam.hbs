@@ -138,91 +138,75 @@
                 </a>
 
             </li>
-            <li class="nav-item">
-    <a class="nav-link collapsed" href="/api/v1/admin/team/national/all" data-toggle="collapse"
-        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>List National Team</span>
-    </a>
-</li>
-
-
-
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-
-        </ul>
-            
-
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
+          <li class="nav-item">
+                <a class="nav-link collapsed" href="/api/v1/admin/team/national/all" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>List National Team</span>
+                </a>
+            </li>
         </ul>
 
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content mx-5 my-3">
                 <h1>National Team List</h1>
 
                 <!-- Add a form for filtering/searching national teams if needed -->
-                {{!-- <form method="get">
-                    <div class="my-3 mx-3">
-                        <label class="my-2" for="lang">Select Country</label>
-                        <select name="country" id="lang">
-                            {{#each countries}}
-                            <option value="{{this}}" selected="selected">{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <button type="submit">Search</button>
-                </form> --}}
-
-                <div class="row justify-content-center">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Index</th>
-                                        <th>Name</th>
-                                        <th>Sequenceno</th>
-                                        <th>Country</th>
-                                        <th>Image</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Index</th>
-                                        <th>Name</th>
-                                        <th>Sequenceno</th>
-                                        <th>Country</th>
-                                        <th>Image</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    {{#each nationalTeams}}
-                                    <tr>
-                                        <td>{{@index}}</td>
-                                        <td>{{this.name}}</td>
-                                        <td>{{this.sequenceno}}</td>
-                                        <td>{{this.country}}</td>
-                                        <th><img src="{{this.image}}" style="height:100px;"></th>
-                                        <td><a href="/api/v1/admin/team/delete/{{this.teamId}}">Delete</a></td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                        </div>
+                 <form method="get">
+                <div class="my-3 mx-3">
+                    <label class="my-2" for="country">Select Country</label>
+                    <select name="country" id="country">
+                        {{#each countries}}
+                        <option value="{{this}}" selected="selected">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit">Search</button>
+            </form>
+            <div class="row justify-content-center">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Name</th>
+                                    <th>Postname</th>
+                                    <th>Sequenceno</th>
+                                    <th>Country</th>
+                                    <th>Image</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Name</th>
+                                    <th>Postname</th>
+                                    <th>Sequenceno</th>
+                                    <th>Country</th>
+                                    <th>Image</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {{#each nationalTeams}}
+                                <tr>
+                                    <td>{{@index}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.postname}}</td> <!-- Added Postname -->
+                                    <td>{{this.sequenceno}}</td>
+                                    <td>{{this.country}}</td>
+                                    <th><img src="{{this.image}}" style="height:100px;"></th>
+                                    <td><a href="/api/v1/admin/team/delete/{{this.teamId}}">Delete</a></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </body>

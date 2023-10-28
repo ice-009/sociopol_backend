@@ -319,45 +319,42 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-    <div class="p-5">
-        <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4">Define National Team</h1>
-        </div>
-        <form class="user" action="/api/v1/admin/create/team/national" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="exampleInputEmail" class="form-label px-2">Team name</label>
-                <input type="text" class="form-control form-control-user" name="name" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter team name">
-            </div>
-            <!-- Add more form fields here for the national team as needed -->
-
-            <div class="form-group">
-                <label for="exampleInpusequence" class="form-label px-2">Sequence no</label>
-                <input type="number" class="form-control form-control-user" name="sequenceno" id="exampleInpusequence" aria-describedby="emailHelp" placeholder="Enter sequence no">
-            </div>
-
-            <!-- Add a select input for the national team specific data, e.g., country -->
-
-            <label class="my-2" for="country">Country</label>
-            {{!-- <select name="country" id="country">
-                <!-- Add options for different countries -->
-                <option value="Country1">Country 1</option>
-                <option value="Country2">Country 2</option>
-                <!-- Add more options as needed -->
-            </select> --}}
-
-            <div class="form-group mb-5">
-                <label for="exampleFormControlFile1">Image</label>
-                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
-            </div>
-            <br><br>
-
-            <button type="submit" class="btn btn-primary btn-user btn-block my-3">
-                Create Team
-            </button>
-        </form>
-        <hr>
+   <div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Define National Team</h1>
     </div>
+   <form class="user" action="/api/v1/admin/create/team/national" method="post"
+                                                enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="exampleInputEmail" class="form-label px-2">Team name</label>
+            <input type="text" class="form-control form-control-user" name="name" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter team name">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInpusequence" class="form-label px-2">Sequence no</label>
+            <input type="number" class="form-control form-control-user" name="sequenceno" id="exampleInpusequence" aria-describedby="emailHelp" placeholder="Enter sequence no">
+        </div>
+
+        <!-- Add an input for the postname and mark it as required -->
+        <div class="form-group">
+            <label for="postname" class="form-label px-2">Post Name</label>
+            <input type="text" class="form-control form-control-user" name="postname" id="postname" placeholder="Enter post name" required>
+        </div>
+
+        <div class="form-group mb-5">
+                                                    <label for="exampleFormControlFile1">Image</label>
+                                                    <input type="file" name="image" class="form-control-file"
+                                                        id="exampleFormControlFile1">
+                                                </div>
+        <br><br>
+
+        <button type="submit" class="btn btn-primary btn-user btn-block my-3">
+            Create Team
+        </button>
+    </form>
+    <hr>
 </div>
+
                                 </div>
                             </div>
 

@@ -7,7 +7,7 @@ const crypto = require('crypto')
 const path = require('path')
 const listconst = require('../data/district')
 const teamService = require('../service/team')
-
+const multer =  require('multer')
 
 const login = catchAsyn(async(req,res)=>{
      try {
@@ -312,12 +312,27 @@ const getTeam = catchAsyn(async(req,res)=>{
 //   res.redirect('/api/v1/admin/team/national/all');
 // });
 
-const createTeamState =catchAsyn(async(req,res)=>{
-    const path = await uploadfile(req)
-    const team =await teamService.createTeam(req.body,path,"state")
-    res.redirect('/api/v1/admin/team/state/all')
+const createTeamState = async (req, res) => {
+  // Use Multer middleware to handle file uploads
+  const upload = multer({ dest: 'images/' });
+  upload.single('image')(req, res, async (err) => {
+      if (err) {
+           res.send(err)  
+           console.log(err)
+          // return res.status(400).json({ message: 'Error uploading file' });
+          
+      }
 
-})
+      // Handle the form data and create the state team
+      try {
+          const team = await teamService.createTeam(req, "state");
+          res.redirect('/api/v1/admin/team/state/all');
+      } catch (error) {
+          res.status(error.status || 500).json({ message: error.message });
+      }
+  });
+};
+
 const createTeamDistrict =catchAsyn(async(req,res)=>{
   const path = await uploadfile(req)
   const team =await teamService.createTeam(req.body,path,"district")
@@ -379,5 +394,6 @@ module.exports = {
     createTeamDistrict,
     deleteTeam,
     getEditBlogById,
+    uploadfile
     // createTeamNational
 }

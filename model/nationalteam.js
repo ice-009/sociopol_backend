@@ -9,14 +9,14 @@ const nationalTeamSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  country: {
+  image: {
     type: String,
     required: true,
   },
-  image: {
-    type: String, // You can store the image URL here
-    // required: true,
-  },
+  postname: {
+    type: String, 
+    required: true
+},
 });
 
 const NationalTeam = mongoose.model('NationalTeam', nationalTeamSchema);
