@@ -1,9 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controller/auth')
+// const multer = require('multer');
+const path = require('path');
+// const multer = require('multer');
+// const upload = multer({ dest: '../images' });
 const adminController = require('../admin/controller/controller')
 const {authToken} = require('../middlewares/auth')
 const NationalTeam = require('../model/nationalteam')
+const TeamModel = require('../model/team')
+// const bodyParser = require('body-parser');
+// const uploadfile = require('../admin/controller/controller')
+// const Upload = require('express-fileupload');
+// async function generateU{niqueTeamId(type) 
+  async function getLastTeamId() {
+    try {
+      const latestTeam = await TeamModel.Team.findOne().sort({ "teamId": -1 });
+  
+      if (latestTeam) {
+        return latestTeam.teamId;
+      }
+  
+      return 0; // Default if there are no existing teams
+    } catch (error) {
+      console.error(error);
+      throw new Error('Error getting the last teamId');
+    }
+  }
 
 router.post( 
   '/login',
@@ -51,37 +74,99 @@ router.get(
   authToken,
   adminController.getTeam
 )
-router.post('/create/team/national', async (req, res) => {
-  try {
-    // Create a new national team using the request data
-    const nationalTeam = new NationalTeam({
-      name: req.body.name,
-      sequenceno: req.body.sequenceno,
-      country: req.body.country,
-      image: req.body.image, // You may need to handle file uploads here
+
+
+ 
+router.post('/create/team/national', async (req,res)=>{
+    try {
+      
+      const image = req.file
+      console.log(image)
+      const imagePath = 'images/' + image.filename;
+      const nationalTeam = new NationalTeam({
+        name: req.body.name,
+        sequenceno: req.body.sequenceno,
+        postname: req.body.postname,
+        image: imagePath
+        // Use the file data obtained from express-fileupload
+      });
+      
+      // Save the national team to the database
+      await nationalTeam.save();
+
+      res.status(201).json({ message: 'National team created successfully' });
+      // res.redirect('/team/national/all')
+    } catch (error) {
+     
+      console.error(error);
+      res.status(500).json({ message: 'Error creating national team' });
+    } 
+  })
+
+  router.post('/create/team/state', async (req,res)=>{
+    try {
+      const lastTeamId = await getLastTeamId();
+      const teamId = lastTeamId + 1;
+
+      const image = req.file
+      console.log(image)
+      const imagePath = 'images/' + image.filename;
+       await TeamModel.Team.create({
+        teamId: teamId,
+        name: req.body.name,
+        type: req.type,
+        image: imagePath,
+        district: req.body.district,
+        postname: req.body.postname,
+        sequenceno: req.body.sequenceno,
+        locationId: req.locationId,
     });
+    return res.status(201).json({ message: 'State team created successfully' });
 
-    // Save the national team to the database
-    await nationalTeam.save();
+      // Save the national team to the database
+      // await nationalTeam.save();
 
-    // Send a success response
-    res.status(201).json({ message: 'National team created successfully' });
-  } catch (error) {
-    // Handle any errors and send an error response
-    console.error(error);
-    res.status(500).json({ message: 'Error creating national team' });
-  }
-});
-router.post(
-  '/create/team/state',
-  authToken,
-  adminController.createTeamState
-)
-router.post(
-  '/create/team/district',
-  authToken,
-  adminController.createTeamDistrict
-)
+      // res.status(201).json({ message: ' team created successfully' });
+      // // res.redirect('/team/national/all')
+    } catch (error) {
+     
+      console.error(error);
+      res.status(500).json({ message: 'Error creating state team' });
+    } 
+  })
+  router.post('/create/team/district', async (req,res)=>{
+    try {
+      // const teambody = await TeamModel.Team.find().sort({ "teamId": -1 }).limit(1);
+      const lastTeamId = await getLastTeamId();
+      const teamId = lastTeamId + 1;
+
+     
+      const image = req.file
+      console.log(image)
+      const imagePath = 'images/' + image.filename;
+       await TeamModel.Team.create({
+        teamId: teamId,
+        name: req.body.name,
+        type: req.type,
+        image: imagePath,
+        district: req.body.district,
+        postname: req.body.postname,
+        sequenceno: req.body.sequenceno,
+        locationId: req.locationId,
+    });
+    return res.status(201).json({ message: 'district team created successfully' });
+
+      // Save the national team to the database
+      // await nationalTeam.save();
+
+      // res.status(201).json({ message: ' team created successfully' });
+      // // res.redirect('/team/national/all')
+    } catch (error) {
+     
+      console.error(error);
+      res.status(500).json({ message: 'Error creating state team' });
+    } 
+  })
 
 router.get(
   '/create/vlog',
