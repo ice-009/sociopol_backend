@@ -77,7 +77,7 @@ router.get(
 
 
  
-router.post('/create/team/national', async (req,res)=>{
+router.post('/create/team/national',authToken, async (req,res)=>{
     try {
       
       const image = req.file
@@ -103,7 +103,7 @@ router.post('/create/team/national', async (req,res)=>{
     } 
   })
 
-  router.post('/create/team/state', async (req,res)=>{
+  router.post('/create/team/state', authToken, async (req,res)=>{
     try {
       const lastTeamId = await getLastTeamId();
       const teamId = lastTeamId + 1;
@@ -134,7 +134,7 @@ router.post('/create/team/national', async (req,res)=>{
       res.status(500).json({ message: 'Error creating state team' });
     } 
   })
-  router.post('/create/team/district', async (req,res)=>{
+  router.post('/create/team/district',authToken, async (req,res)=>{
     try {
       // const teambody = await TeamModel.Team.find().sort({ "teamId": -1 }).limit(1);
       const lastTeamId = await getLastTeamId();
