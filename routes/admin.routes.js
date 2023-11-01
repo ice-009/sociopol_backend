@@ -79,10 +79,12 @@ router.get(
  
 router.post('/create/team/national',authToken, async (req,res)=>{
     try {
-      
-      const image = req.file
-      console.log(image)
-      const imagePath = 'images/' + image.filename;
+      //image not handled by him
+      // const image = req.file
+      // console.log(image)
+      // const imagePath = 'images/' + image.filename;
+      const path = await  adminController.uploadfile(req)
+      const imagePath = path
       const nationalTeam = new NationalTeam({
         name: req.body.name,
         sequenceno: req.body.sequenceno,
@@ -108,13 +110,16 @@ router.post('/create/team/national',authToken, async (req,res)=>{
       const lastTeamId = await getLastTeamId();
       const teamId = lastTeamId + 1;
 
-      const image = req.file
-      console.log(image)
-      const imagePath = 'images/' + image.filename;
+      // const image = req.file
+      // console.log(image)
+      // const imagePath = 'images/' + image.filename;
+      const path = await  adminController.uploadfile(req)
+      const imagePath = path
        await TeamModel.Team.create({
         teamId: teamId,
         name: req.body.name,
-        type: req.type,
+        // type: req.type,
+        type: req.body.type,
         image: imagePath,
         district: req.body.district,
         postname: req.body.postname,
@@ -141,9 +146,11 @@ router.post('/create/team/national',authToken, async (req,res)=>{
       const teamId = lastTeamId + 1;
 
      
-      const image = req.file
-      console.log(image)
-      const imagePath = 'images/' + image.filename;
+      // const image = req.file
+      // console.log(image)
+      // const imagePath = 'images/' + image.filename;
+      const path = await  adminController.uploadfile(req)
+      const imagePath = path
        await TeamModel.Team.create({
         teamId: teamId,
         name: req.body.name,
@@ -239,6 +246,12 @@ router.get(
   '/team/delete/:id',
   authToken,
   adminController.deleteTeam
+)
+
+router.get(
+  '/team/national/delete/:id',
+  authToken,
+  adminController.deleteTeamNational
 )
 // router.get(
 //   '/user/delete/:id',

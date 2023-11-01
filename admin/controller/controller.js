@@ -46,6 +46,7 @@ const uploadfile = async(req)=>{
     const { image} = req.files;
 
     // If no image submitted, exit
+
     // if (!image) return res.sendStatus(400);
 
     const ext = path.extname(image.name)
@@ -62,7 +63,7 @@ const uploadfile = async(req)=>{
     //   success:true,
     //   url:name+ext
     // })
-
+    console.log(svreturn)
     return svreturn
 
 }
@@ -349,12 +350,21 @@ const deleteTeam = catchAsyn(async(req,res)=>{
      const type =await teamService.deleteTeamById(req.params.id)
      res.redirect('/api/v1/admin/team/'+type+'/all')
 })
+const deleteTeamNational = catchAsyn(async(req,res)=>{
+  await teamService.deleteTeamByIdN(req.params.id)
+  res.redirect('/api/v1/admin/team/national/all')
+})
 
 const getTeamdistrictList = catchAsyn(async(req,res)=>{
 
   const team = await teamService.getDistrictAllTeam(req)
   res.render('new/listteamdistrict',{"team":team,"district":listconst.districtList})
 })
+
+
+// const createNationalTeam = catchAsyn(async(req,res)=>{
+    
+// })
 
 
 const randomByte = (size)=>{
@@ -394,6 +404,7 @@ module.exports = {
     createTeamDistrict,
     deleteTeam,
     getEditBlogById,
-    uploadfile
+    uploadfile,
+    deleteTeamNational
     // createTeamNational
 }

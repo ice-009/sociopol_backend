@@ -11,7 +11,6 @@ const signup = catchAsyn(async(req,res)=>{
 
        const dppath = await uploadfile(req)
 
-
         const user = await authService.signup(req.body,dppath)
         sendToken(user,201,res)
      } catch (error) {

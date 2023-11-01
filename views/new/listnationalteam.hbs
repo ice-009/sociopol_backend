@@ -199,7 +199,9 @@
                                     <td>{{this.sequenceno}}</td>
                                     <td>{{this.country}}</td>
                                     <th><img src="{{this.image}}" style="height:100px;"></th>
-                                    <td><a href="/api/v1/admin/team/delete/{{this.teamId}}">Delete</a></td>
+                                    {{!-- <td><a href="/api/v1/admin/team/delete/{{this.teamId}}">Delete</a></td> --}}
+                                    <td><a href="/api/v1/admin/team/national/delete/{{this.id}}">Delete</a></td>
+                                
                                 </tr>
                                 {{/each}}
                             </tbody>

@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 const sendToken = require('../../utils/sendtoken')
 const sendTokenWeb = require('../../utils/stweb')
 const TeamModel = require('../../model/team')
+// const NationalTeam = require('../../model/nationalteam')
 const listconst = require('../data/district')
 const NationalTeam = require('../../model/nationalteam')
 
@@ -67,6 +68,15 @@ const deleteTeamById = async (id) => {
     return type
 }
 
+const deleteTeamByIdN = async (id) => {
+    
+    // const team = await TeamModel.Team.findById(id)
+    // const type = team.type
+    await NationalTeam.findByIdAndDelete(id)
+    // await TeamModel.Team.findOneAndDelete({ "teamId": id })
+    // return type
+}
+
 const getStateAllTeam = async () => {
     const teams = await TeamModel.Team.find()
     //  console.log(teams[1].type)
@@ -116,5 +126,6 @@ module.exports = {
     getStateAllTeam,
     deleteTeamById,
     getDistrictAllTeam,
-    getNationalAllTeam
+    getNationalAllTeam,
+    deleteTeamByIdN
 }
