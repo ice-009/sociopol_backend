@@ -88,7 +88,7 @@ app.use(fileUpload())
 
 
 // const templatePath = path.join(__dirname,"../templates")
-const partialPath = path.join(__dirname,"./partials")
+const partialPath = path.join(__dirname, "./partials")
 
 
 
@@ -104,12 +104,12 @@ hbs.registerPartials(partialPath)
 app.use(express.json())
 app.set('trust proxy', true)
 mongoose.set('strictQuery', true)
-app.use('/api/v1',apiRoutes);
+app.use('/api/v1', apiRoutes);
 
 app.use(express.static(path.join('public')));
 
 
-dotenv.config({path:".env"});
+dotenv.config({ path: ".env" });
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

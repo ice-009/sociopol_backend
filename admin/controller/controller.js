@@ -5,6 +5,7 @@ const vlogService = require('../service/vlog')
 const AdminModel = require('../../model/admin')
 const crypto = require('crypto')
 const path = require('path')
+const fs = require('fs/promises');
 const listconst = require('../data/district')
 const teamService = require('../service/team')
 const multer =  require('multer')
@@ -41,32 +42,36 @@ const getAllVlog = catchAsyn(async(req,res)=>{
 })
 
 
-const uploadfile = async(req)=>{
+const uploadfile = async (req) => {
+  if (!req.files || !req.files.image) {
+      throw new Error("No image found in request");
+  }
 
-    const { image} = req.files;
+  const { image } = req.files;
 
-    // If no image submitted, exit
+  const ext = path.extname(image.name);
+  const name = randomByte(10); // Assuming randomByte is defined elsewhere
+  const filename = name + ext;
+  const directory = path.join(__dirname, '../../public/file/');
 
-    // if (!image) return res.sendStatus(400);
+  console.log("Destination directory:", directory);
 
-    const ext = path.extname(image.name)
+  try {
+      // Ensure directory exists
+      await fs.mkdir(directory, { recursive: true });
 
-    const name = randomByte(10)
-
-    const svname = __dirname + '../../../public/file/' +name +ext
-    const svreturn = '/file/' +name +ext
-
-    // Move the uploaded image to our upload folder
-    image.mv(svname);
-
-    // res.status(201).json({
-    //   success:true,
-    //   url:name+ext
-    // })
-    console.log(svreturn)
-    return svreturn
-
-}
+      // Move the uploaded image to the directory
+      const svname = path.join(directory, filename);
+      await image.mv(svname);
+      
+      const svreturn = '/file/' + filename;
+      console.log("File uploaded successfully:", svreturn);
+      return svreturn;
+  } catch (error) {
+      console.error("Error uploading file:", error);
+      throw error;
+  }
+};
 
 const uploadfilethumb = async(req)=>{
 
